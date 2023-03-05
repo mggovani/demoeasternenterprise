@@ -1,6 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\API\CompanyController;
+use App\Http\Controllers\API\UserDataImportController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,8 +13,9 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
-*/
+ */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['prefix' => 'v1'], function () {
+  	Route::get('import-data', [UserDataImportController::class, 'importData']);
+	Route::get('companies', [CompanyController::class, 'index']);
 });
